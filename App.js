@@ -10,6 +10,7 @@ import {
   Modal,
 } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function App() {
   const [task, setTask] = useState('');
@@ -149,7 +150,7 @@ export default function App() {
       <Button title="Sortuj po dacie" onPress={sortTasksByDeadline} />
       <FlatList
         style={styles.listContainer}
-        contentContainerStyle={{ paddingHorizontal: 10 }} // Dodano odstępy po bokach
+        contentContainerStyle={{ paddingHorizontal: 10 }}
         data={tasks}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
@@ -178,15 +179,28 @@ export default function App() {
             </View>
             <View style={styles.taskButtons}>
               <TouchableOpacity onPress={() => toggleCompletion(item.id)}>
-                <Text style={styles.completeButton}>
-                  {item.completed ? 'Odznacz' : 'Ukończ'}
-                </Text>
+                <FontAwesome
+                  name={item.completed ? 'check-square-o' : 'square-o'}
+                  size={30}
+                  color={item.completed ? '#28a745' : '#007bff'}
+                  style={styles.icon}
+                />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => editTask(item.id)}>
-                <Text style={styles.editButton}>Edytuj</Text>
+                <FontAwesome
+                  name="pencil"
+                  size={24}
+                  color="#007bff"
+                  style={styles.icon}
+                />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => deleteTask(item.id)}>
-                <Text style={styles.deleteButton}>Usuń</Text>
+                <FontAwesome
+                  name="trash"
+                  size={24}
+                  color="#dc3545"
+                  style={styles.icon}
+                />
               </TouchableOpacity>
             </View>
           </View>
@@ -217,7 +231,11 @@ export default function App() {
             <Button title="Zapisz zmiany" onPress={saveEditedTask} />
             <TouchableOpacity
               style={styles.modalCancelButton}
-              onPress={() => setEditModalVisible(false)}>
+              onPress={() => {
+                setTask(''); // Resetuje tekst zadania
+                setDeadline(''); // Resetuje deadline
+                setEditModalVisible(false); // Zamknięcie modala
+              }}>
               <Text style={styles.modalCancelButtonText}>Anuluj</Text>
             </TouchableOpacity>
           </View>
@@ -239,6 +257,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#f4f7f9',
+    marginTop: 30, // Przesunięcie w dół
   },
   title: {
     fontSize: 26,
@@ -317,23 +336,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  completeButton: {
-    color: '#28a745',
-    marginRight: 12,
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  editButton: {
-    color: '#007bff',
-    marginRight: 12,
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  deleteButton: {
-    color: '#dc3545',
-    fontSize: 16,
-    fontWeight: '600',
-  },
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -357,18 +359,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
     color: '#333',
-  },
-  modalButton: {
-    padding: 12,
-    backgroundColor: '#007bff',
-    borderRadius: 8,
-    marginTop: 10,
-  },
-  modalButtonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: 16,
-    fontWeight: '600',
   },
   modalCancelButton: {
     padding: 12,
@@ -398,5 +388,8 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  icon: {
+    marginHorizontal: 10, // Dodano odstęp między ikonami
   },
 });
