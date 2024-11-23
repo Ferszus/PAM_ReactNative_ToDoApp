@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import {View, Text, TextInput, Button, FlatList, StyleSheet, TouchableOpacity, Modal} from "react-native"
+import {View, Text, TextInput, Button, FlatList, StyleSheet, TouchableOpacity, Modal, Switch} from "react-native"
 import DateTimePickerModal from "react-native-modal-datetime-picker"
 import FontAwesome from "react-native-vector-icons/FontAwesome"
 import AsyncStorage from "@react-native-async-storage/async-storage"
@@ -10,6 +10,7 @@ export default function App() {
     const [tasks, setTasks] = useState([])
     const [isDatePickerVisible, setIsDatePickerVisible] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
+    const [isDarkMode, setIsDarkMode] = useState(false)
     const [editTaskId, setEditTaskId] = useState(null)
     const [editModalVisible, setEditModalVisible] = useState(false)
     const [aboutModalVisible, setAboutModalVisible] = useState(false) // New state for About modal
@@ -149,11 +150,18 @@ export default function App() {
         })
     }
 
+    const toggleDarkMode = () => {
+        setIsDarkMode(prev => !prev)
+    }
+
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Lista To-Do</Text>
+        <View style={[styles.container, {backgroundColor: isDarkMode ? "#555" : "#f4f7f9"}]}>
+            <View style={styles.header}>
+                <Text style={[styles.title, isDarkMode && {color: "white"}]}>Lista To-Do</Text>
+                <Switch value={isDarkMode} onValueChange={toggleDarkMode} trackColor={{false: "#ccc", true: "grey"}} thumbColor={isDarkMode ? "#grey" : "#f4f3f4"} />
+            </View>
             <View style={styles.inputContainer}>
-                <TextInput style={styles.input} placeholder="Dodaj zadanie..." value={task} onChangeText={setTask} />
+                <TextInput style={[styles.input, isDarkMode && {backgroundColor: "grey"}]} placeholder="Dodaj zadanie..." placeholderTextColor={isDarkMode ? "#ccc" : "#666"} value={task} onChangeText={setTask} />
                 <TouchableOpacity style={styles.dateButton} onPress={showDatePicker}>
                     <Text style={styles.dateButtonText}>{deadline ? `Deadline: ${deadline}` : "Ustaw Deadline"}</Text>
                 </TouchableOpacity>
@@ -169,7 +177,7 @@ export default function App() {
                 data={tasks}
                 keyExtractor={item => item.id}
                 renderItem={({item}) => (
-                    <View style={[styles.taskContainer, isToday(item.deadline) && item.completed ? styles.completedTaskContainer : isToday(item.deadline) ? styles.todayTaskContainer : isPastDeadline(item.deadline) ? styles.pastDeadlineTaskContainer : item.completed ? styles.completedTaskContainer : null]}>
+                    <View style={[styles.taskContainer, isDarkMode && {backgroundColor: "#ddd"}, isToday(item.deadline) && item.completed ? styles.completedTaskContainer : isToday(item.deadline) ? styles.todayTaskContainer : isPastDeadline(item.deadline) ? styles.pastDeadlineTaskContainer : item.completed ? styles.completedTaskContainer : null]}>
                         <View>
                             <Text style={[styles.taskText, item.completed && styles.completedTaskText]}>{item.text}</Text>
                             <Text style={styles.deadlineText}>Termin: {item.deadline}</Text>
@@ -196,8 +204,8 @@ export default function App() {
                 transparent={true}
             >
                 <View style={styles.modalContainer}>
-                    <View style={styles.modalContent}>
-                        <Text style={styles.modalTitle}>Edytuj zadanie</Text>
+                    <View style={[styles.modalContent, isDarkMode && {backgroundColor: "#333"}]}>
+                        <Text style={[styles.modalTitle, isDarkMode && {color: "white"}]}>Edytuj zadanie</Text>
                         <TextInput style={styles.input} placeholder="Zmień treść zadania..." value={task} onChangeText={setTask} />
                         <TouchableOpacity style={styles.dateButton} onPress={showDatePicker}>
                             <Text style={styles.dateButtonText}>{deadline ? `Deadline: ${deadline}` : "Ustaw Deadline"}</Text>
@@ -238,7 +246,7 @@ export default function App() {
 
             {/* About Button at the bottom */}
             <TouchableOpacity style={styles.aboutButton} onPress={showAboutModal}>
-                <Text style={styles.aboutButtonText}>About?</Text>
+                <Text style={[styles.aboutButtonText, , isDarkMode && {color: "white"}]}>About?</Text>
             </TouchableOpacity>
         </View>
     )
