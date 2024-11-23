@@ -9,3 +9,26 @@ All projects created in Snack are publicly available, so you can easily share th
 If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.dev/c/expo-dev-tools/61) or [Discord](https://chat.expo.dev/).
 
 Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
+
+
+
+
+
+
+
+
+############################ WAŻNE #################################
+wymagane zainstalowane:
+npm
+nodejs
+android studio
+VSC
+
+
+1. uruchamiasz VSC i Android Studio
+2. w android studio włączasz emulator telefonu
+3. wpisujesz w terminalu VSC "npm start"
+4. W emulatorze powinna wyskoczyć informacja, czy chcesz pozwolić na połączenie emulatora andorid studio z VSC
+5. akcpetujesz
+6. Gdy włączy się metro naciskasz klawisz "a"
+7. Aplikacja powinna się odpalić na telefonie emulowanym przez Android Studio
