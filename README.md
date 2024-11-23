@@ -27,7 +27,7 @@ VSC
 
 1. uruchamiasz VSC i Android Studio
 2. w android studio włączasz emulator telefonu
-3. wpisujesz w terminalu VSC "npm start"
+3. wpisujesz w terminalu VSC "npm install" i "npm start"
 4. W emulatorze powinna wyskoczyć informacja, czy chcesz pozwolić na połączenie emulatora andorid studio z VSC
 5. akcpetujesz
 6. Gdy włączy się metro naciskasz klawisz "a"
