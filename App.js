@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() {
   const [task, setTask] = useState('');
@@ -21,33 +22,70 @@ export default function App() {
   const [editTaskId, setEditTaskId] = useState(null);
   const [editModalVisible, setEditModalVisible] = useState(false);
 
+  useEffect(() => {
+    const loadTasks = async () => {
+      try {
+        const value = await AsyncStorage.getItem('@tasks');
+        if (value !== null) {
+          const tasks = JSON.parse(value);
+          setTasks(tasks);
+        }
+      } catch (error) {
+        console.error('Błąd podczas wczytywania zadań:', error);
+      }
+    };
+  
+    loadTasks();
+  }, []);
+
+
+
+  const saveTasksToStorage = async (tasks) => {
+    try {
+      const jsonValue = JSON.stringify(tasks);
+      await AsyncStorage.setItem('@tasks', jsonValue);
+      console.log('Zadania zapisane pomyślnie');
+    } catch (error) {
+      console.error('Błąd podczas zapisywania zadań:', error);
+    }
+  };
+
   const addTask = () => {
     if (task.trim()) {
-      setTasks([
-        ...tasks,
-        {
-          id: Date.now().toString(),
-          text: task,
-          deadline: deadline || 'Brak terminu',
-          completed: false,
-        },
-      ]);
+      // Tworzymy nowy obiekt zadania
+      const newTask = {
+        id: Date.now().toString(),
+        text: task,
+        deadline: deadline || 'Brak terminu',
+        completed: false,
+      };
+
+      const updatedTasks = [...tasks, newTask];
+      saveTasksToStorage(updatedTasks);
+      setTasks(updatedTasks);
       setTask('');
       setDeadline('');
     }
   };
 
   const deleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+    const updatedTasks = tasks.filter((task) => task.id !== id);
+    setTasks(updatedTasks);
+    saveTasksToStorage(updatedTasks);
   };
 
   const toggleCompletion = (id) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
+  setTasks((prevTasks) => {
+    const updatedTasks = prevTasks.map((task) =>
+      task.id === id
+        ? { ...task, completed: !task.completed }
+        : task
     );
-  };
+    saveTasksToStorage(updatedTasks);
+    
+    return updatedTasks;
+  });
+};
 
   const editTask = (id) => {
     const taskToEdit = tasks.find((task) => task.id === id);
@@ -59,13 +97,17 @@ export default function App() {
   };
 
   const saveEditedTask = () => {
-    setTasks((prevTasks) =>
-      prevTasks.map((t) =>
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.map((t) =>
         t.id === editTaskId
           ? { ...t, text: task, deadline: deadline || t.deadline }
           : t
-      )
-    );
+      );
+      saveTasksToStorage(updatedTasks);
+        
+      return updatedTasks;
+    });
+
     setTask('');
     setDeadline('');
     setEditTaskId(null);
