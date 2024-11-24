@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import {View, Text, TextInput, Button, FlatList, StyleSheet, TouchableOpacity, Modal, Switch} from "react-native"
+import {View, Text, TextInput, Button, FlatList, StyleSheet, TouchableOpacity, Modal, Switch, Image} from "react-native"
 import DateTimePickerModal from "react-native-modal-datetime-picker"
 import FontAwesome from "react-native-vector-icons/FontAwesome"
 import AsyncStorage from "@react-native-async-storage/async-storage"
@@ -157,10 +157,10 @@ export default function App() {
     return (
         <View style={[styles.container, {backgroundColor: isDarkMode ? "#555" : "#f4f7f9"}]}>
             <View style={styles.header}>
-                <Text style={[styles.title, isDarkMode && {color: "white"}]}>Lista To-Do</Text>
-                <Switch value={isDarkMode} onValueChange={toggleDarkMode} trackColor={{false: "#ccc", true: "grey"}} thumbColor={isDarkMode ? "#grey" : "#f4f3f4"} />
+                <Image source={require('./assets/title.png')} style={styles.titleImage}/>
             </View>
             <View style={styles.inputContainer}>
+                <Switch value={isDarkMode} onValueChange={toggleDarkMode} trackColor={{false: "#ccc", true: "grey"}} thumbColor={isDarkMode ? "#grey" : "#f4f3f4"} />
                 <TextInput style={[styles.input, isDarkMode && {backgroundColor: "grey"}]} placeholder="Dodaj zadanie..." placeholderTextColor={isDarkMode ? "#ccc" : "#666"} value={task} onChangeText={setTask} />
                 <TouchableOpacity style={styles.dateButton} onPress={showDatePicker}>
                     <Text style={styles.dateButtonText}>{deadline ? `Deadline: ${deadline}` : "Ustaw Deadline"}</Text>
@@ -253,6 +253,17 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+
+    titleImage: {
+        width: 250,
+        height: 500,
+        resizeMode: 'contain',
+    },
+    header: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     container: {
         flex: 1,
         padding: 20,
@@ -280,7 +291,7 @@ const styles = StyleSheet.create({
     },
     dateButton: {
         padding: 12,
-        backgroundColor: "#007bff",
+        backgroundColor: "#6A5ACD",
         borderRadius: 8,
         marginBottom: 10,
     },
@@ -380,9 +391,9 @@ const styles = StyleSheet.create({
         fontWeight: "600",
     },
     addButton: {
-        padding: 15,
-        backgroundColor: "#28a745", // Zielony kolor dla wyróżnienia
-        borderRadius: 10, // Zaokrąglone rogi
+        padding: 12,
+        backgroundColor: "#9932CC", // Zielony kolor dla wyróżnienia
+        borderRadius: 8, // Zaokrąglone rogi
         alignItems: "center",
         marginTop: 10,
         elevation: 5, // Dodanie cienia dla efektu "przycisku"
