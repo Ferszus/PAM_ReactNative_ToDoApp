@@ -69,8 +69,6 @@ Możesz przełączać tryb ciemny w nagłówku aplikacji, a cała aplikacja zmie
 
 Każde zadanie może mieć przypisany termin, a aplikacja pozwala na sortowanie zadań według daty terminu.
 
-### Budowanie APK z AAB
-
 ## Technologie użyte w projekcie
 
 -   **React Native**: Framework JavaScript do budowania aplikacji mobilnych.
