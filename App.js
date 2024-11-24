@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import {View, Text, TextInput, Button, FlatList, StyleSheet, TouchableOpacity, Modal, Switch, Image} from "react-native"
+import {View, Text, TextInput, Button, FlatList, StyleSheet, TouchableOpacity, Modal, Switch} from "react-native"
 import DateTimePickerModal from "react-native-modal-datetime-picker"
 import FontAwesome from "react-native-vector-icons/FontAwesome"
 import AsyncStorage from "@react-native-async-storage/async-storage"
@@ -157,10 +157,10 @@ export default function App() {
     return (
         <View style={[styles.container, {backgroundColor: isDarkMode ? "#555" : "#f4f7f9"}]}>
             <View style={styles.header}>
-                <Image source={require('./assets/title.png')} style={styles.titleImage}/>
+                <Text style={[styles.title, isDarkMode && {color: "white"}]}>Lista To-Do</Text>
+                <Switch value={isDarkMode} onValueChange={toggleDarkMode} trackColor={{false: "#ccc", true: "grey"}} thumbColor={isDarkMode ? "#grey" : "#f4f3f4"} />
             </View>
             <View style={styles.inputContainer}>
-                <Switch value={isDarkMode} onValueChange={toggleDarkMode} trackColor={{false: "#ccc", true: "grey"}} thumbColor={isDarkMode ? "#grey" : "#f4f3f4"} />
                 <TextInput style={[styles.input, isDarkMode && {backgroundColor: "grey"}]} placeholder="Dodaj zadanie..." placeholderTextColor={isDarkMode ? "#ccc" : "#666"} value={task} onChangeText={setTask} />
                 <TouchableOpacity style={styles.dateButton} onPress={showDatePicker}>
                     <Text style={styles.dateButtonText}>{deadline ? `Deadline: ${deadline}` : "Ustaw Deadline"}</Text>
@@ -254,16 +254,6 @@ export default function App() {
 
 const styles = StyleSheet.create({
 
-    titleImage: {
-        width: 250,
-        height: 500,
-        resizeMode: 'contain',
-    },
-    header: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     container: {
         flex: 1,
         padding: 20,
