@@ -69,7 +69,13 @@ Możesz przełączać tryb ciemny w nagłówku aplikacji, a cała aplikacja zmie
 
 Każde zadanie może mieć przypisany termin, a aplikacja pozwala na sortowanie zadań według daty terminu.
 
-### Budowanie APK z AAB
+## Plik APK
+
+W repozytorium znajduje się plik **.apk**, który umożliwia zainstalowanie aplikacji na telefonie z systemem Android. Aby zainstalować aplikację:
+
+1. Pobierz plik APK z repozytorium.
+2. Upewnij się, że masz włączoną opcję **„Zezwól na instalację aplikacji z nieznanych źródeł”** w ustawieniach swojego urządzenia.
+3. Zainstaluj plik APK na swoim urządzeniu Android.
 
 ## Technologie użyte w projekcie
 
