@@ -1,34 +1,90 @@
-# Sample Snack app
+# ToDoApp
 
-Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
+<img src="/assets/adaptive-icon.png" width="250px" style="border-radius: 30px;">
 
-When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Download** your project and use it with [expo cli](https://docs.expo.dev/get-started/installation/#expo-cli)).
+ToDoApp to aplikacja do zarządzania zadaniami stworzona za pomocą React Native i Expo. Aplikacja pozwala użytkownikom dodawać, edytować, usuwać zadania oraz ustalać terminy. Zawiera również tryb ciemny oraz funkcję sortowania zadań według daty terminu.
 
-All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the `<>` button.
+## Funkcje
 
-If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.dev/c/expo-dev-tools/61) or [Discord](https://chat.expo.dev/).
+-   **Dodawanie zadań**: Użytkownicy mogą dodawać zadania z lub bez terminów.
+-   **Edycja zadań**: Użytkownicy mogą modyfikować istniejące zadania.
+-   **Usuwanie zadań**: Użytkownicy mogą usuwać zadania.
+-   **Zakończenie zadania**: Możliwość oznaczenia zadania jako ukończone.
+-   **Sortowanie po terminie**: Zadania mogą być sortowane według daty terminu.
+-   **Tryb ciemny**: Przełączanie między trybem jasnym a ciemnym.
+-   **Sekcja "O nas"**: Wyświetla informacje o zespole deweloperskim.
 
-Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
+## Zrzuty ekranu
 
+![Zrzut ekranu ToDoApp](/assets/gui.png)
 
+## Jak zacząć
 
+### Wymagania wstępne
 
+-   **Node.js**: Upewnij się, że masz zainstalowany Node.js.
+-   **Expo CLI**: Aby uruchomić projekt lokalnie i budować pliki APK.
+-   **Android Studio**: Do emulowania urządzeń Android do testowania.
+-   **Visual Studio Code**: Edytor kodu do rozwoju aplikacji.
 
+### Instalacja
 
+1. **Sklonuj repozytorium**:
 
+    ```bash
+    git clone https://github.com/Ferszus/PAM_ReactNative_ToDoApp.git
+    cd PAM_ReactNative_ToDoApp
+    ```
 
-############################ WAŻNE #################################
-wymagane zainstalowane:
-npm
-nodejs
-android studio
-VSC
+2. **Zainstaluj zależności**:
 
+    ```bash
+    npm install
+    ```
 
-1. uruchamiasz VSC i Android Studio
-2. w android studio włączasz emulator telefonu
-3. wpisujesz w terminalu VSC "npm install" i "npm start"
-4. W emulatorze powinna wyskoczyć informacja, czy chcesz pozwolić na połączenie emulatora andorid studio z VSC
-5. akcpetujesz
-6. Gdy włączy się metro naciskasz klawisz "a"
-7. Aplikacja powinna się odpalić na telefonie emulowanym przez Android Studio
+3. **Uruchom aplikację**:
+   Uruchom aplikację w swoim lokalnym środowisku, używając poniższej komendy:
+
+    ```bash
+    expo start
+    ```
+
+4. **Uruchom na emulatorze Androida**:
+   Aby uruchomić aplikację na emulatorze Androida, wykonaj:
+
+    ```bash
+    expo start --android
+    ```
+
+5. **Uruchom na urządzeniu fizycznym**:
+   Zeskanuj kod QR za pomocą aplikacji Expo Go na swoim urządzeniu Android lub iOS, aby uruchomić aplikację.
+
+### Konfiguracja
+
+#### Tryb ciemny
+
+Możesz przełączać tryb ciemny w nagłówku aplikacji, a cała aplikacja zmieni wygląd na ciemniejszy, co jest bardziej wygodne do użytku w nocy.
+
+#### Termin zadania
+
+Każde zadanie może mieć przypisany termin, a aplikacja pozwala na sortowanie zadań według daty terminu.
+
+### Budowanie APK z AAB
+
+## Technologie użyte w projekcie
+
+-   **React Native**: Framework JavaScript do budowania aplikacji mobilnych.
+-   **Expo**: Platforma open-source do uniwersalnych aplikacji React.
+-   **React Navigation**: Do nawigacji między ekranami w aplikacji.
+-   **AsyncStorage**: Do przechowywania danych zadania lokalnie na urządzeniu.
+
+## Członkowie zespołu
+
+-   **Hubert Parylak** - Nr albumu: 71519
+-   **Kacper Gasiul** - Nr albumu: 81550
+-   **Tomasz Zańko** - Nr albumu: 68356
+-   **Łukasz Jarębski** - Nr albumu: 67530
+
+## Licencja
+
+Ten projekt jest licencjonowany na podstawie licencji MIT.
